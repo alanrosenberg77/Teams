@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: verdana;
+            }
+        
+            h1 {
+                text-align: center;
+            }
+        
+            p {
+                font-size: 18px;
+            }
+
+            li {
+                font-size: 18px;
+            }
+
+            code {
+                background-color: lightgrey;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>WELCOME TO TEAMS</h1>
+        <hr>
+        <p>Teams is a command line based app that allows users to join teams of their peers remotely, set their status,
+            see the stati of their peers, and switch teams.</p>
+        
+        <p>Some Assumptions:</p>
+        <ul>
+            <li>Clients know the <b>IP address and port</b> of the server</li>
+            <li>Clients know the ID of the team they would like to join</li>
+            <li>Clients coordinate amongst themselves to determine which teams they will join</li>
+            <li>Clients are only allowed in 1 team at a time</li>
+        </ul>
+        
+        <hr>
+        <h2>Directions</h2>
+        
+        <h3>Server Admin</h3>
+        <p>To initialize the server, use a command prompt to navigate to the <code>src</code> folder of the app. Once there, use
+            the following command to start the server: <code>java TeamServer</code>. The server admin will be prompted to
+            provide
+            the <b>port number</b> on which the server will listen for incoming messages. After that, the server is initialized
+            and will operate autonomously!</p>
+        
+        <h3>Clients</h3>
+        <p>To get started, use a command prompt to navigate to the <code>src</code> folder of the app. Once there, use the
+            following
+            command to start the app client: <code>java TeamClient</code>. Clients will be prompted to provide the <b>IP
+                address</b> of the
+            server, then the server <b>port number</b>. After that, clients will be able to select from a set of commands:</p>
+        <ul>
+            <li><code>CONN (client name) (team ID) (initial status)</code></li>
+            <li><code>UPDATE (client ID) (new status)</code></li>
+            <li><code>GET (client ID)</code></li>
+            <li><code>SWITCH (client ID) (new team ID)</code></li>
+        </ul>
+        <p><code>CONN</code> takes 3 parameters: the client's name in plain text, the ID of the team the client wishes to
+            join, and the client's initial status at the time of connection to the server. Upon using this command, the
+            client will receive an acknowledgement from the server that contains their unique ID. Clients must remember
+            this ID as they will need it when using the other commands.</p>
+        
+        <p><code>UPDATE</code> takes 2 parameters: the client's ID (provided after running the <code>CONN</code> command), and
+            the client's new
+            status. This command will cause the server to update it's backend to reflect the client's updated status.
+            Others in the same team will be able to see this new status when they run the <code>GET</code> command.</p>
+        
+        <p><code>GET</code> takes 1 parameter: the client's ID (provided after running the <code>CONN</code> command). This
+            command will request
+            from the server the status vector of the client's team, printing a neatly formatted readout with their
+            teammates' names and stati.</p>
+        
+        <p><code>SWITCH</code> takes 2 parameters: the client's ID (provided after running the <code>CONN</code> command), and
+            the ID of the team
+            the client would like to join. Running this command changes the client's team from their current team to the
+            team that matches the ID they provide. They are removed from their previous team.</p>
+    </body>
+</html>
